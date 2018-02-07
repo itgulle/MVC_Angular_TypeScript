@@ -1,0 +1,22 @@
+﻿@using ClientDependency.Core.Mvc
+@model MVC_Angular_TypeScript.Models.AboutUsViewModel
+@{ 
+    Html.RequiresJs("~/Scripts/jquery-1.10.2.min.js")
+        .RequiresJs("~/Scripts/angular.min.js")
+    .RequiresJs("~/Scripts/ViewScripts/AboutUsService.js")
+    .RequiresJs("~/Scripts/ViewScripts/AboutUsController.js")
+    .RequiresJs("~/Scripts/ViewScripts/AboutUsApp.js");
+}
+<div ng-controller="aboutUsController as vm">
+    Name: {{vm.viewModel.model.CompanyName}}<br />
+    Address: {{vm.viewModel.model.CompanyAddress}}
+</div>
+@Html.RenderJsHere()
+<script>
+    $(function() {
+        var presets = {
+            model : @Html.Raw(Json.Encode(Model))}
+        var app = new About.Us.AboutUsApp(presets);
+        app.init();
+    });
+</script>
